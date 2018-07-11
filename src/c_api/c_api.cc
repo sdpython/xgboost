@@ -819,7 +819,6 @@ XGB_DLL int XGBoosterCreate(const DMatrixHandle dmats[],
                     xgboost::bst_ulong len,
                     BoosterHandle *out) {
   API_BEGIN();
-  CHECK_HANDLE();
   std::vector<std::shared_ptr<DMatrix> > mats;
   for (xgboost::bst_ulong i = 0; i < len; ++i) {
     mats.push_back(*static_cast<std::shared_ptr<DMatrix>*>(dmats[i]));
@@ -948,7 +947,6 @@ XGB_DLL int XGBoosterCopyEntries(SparseEntry * entries,
                                   float missing)
 {
   API_BEGIN();
-  CHECK_HANDLE();
   SparseEntry * res = entries;
   xgboost::bst_ulong new_count = *nb_entries;
   bool nan_missing = common::CheckNAN(missing);
@@ -1114,7 +1112,6 @@ XGB_DLL int XGBoosterPredictNoInsideCache(BoosterHandle handle,
 XGB_DLL int XGBoosterPredictNoInsideCacheAllocate(int nb_features, /*RegTree::FVec*/ void** regtreefvec)
 {
 	API_BEGIN();
-    CHECK_HANDLE();
 	DCHECK(regtreefvec != NULL) << "regtreevec cannot be null";
 	RegTree::FVec * buffer = new RegTree::FVec();
 	buffer->Init(nb_features);
@@ -1125,7 +1122,6 @@ XGB_DLL int XGBoosterPredictNoInsideCacheAllocate(int nb_features, /*RegTree::FV
 XGB_DLL int XGBoosterPredictNoInsideCacheFree(/*RegTree::FVec*/ void* regtreefvec)
 {
 	API_BEGIN();
-    CHECK_HANDLE();
 	DCHECK(regtreefvec != NULL) << "regtreevec cannot be null";
 	RegTree::FVec * buffer = (RegTree::FVec*)regtreefvec;
 	delete buffer;
